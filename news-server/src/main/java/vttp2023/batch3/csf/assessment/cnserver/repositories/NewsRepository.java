@@ -82,6 +82,12 @@ public class NewsRepository {
 
 	// TODO: Task 3
 	// Write the native Mongo query in the comment above the method
+	/*
+	db.news.aggregate([
+		{ $match: {tags:{ $in: ["bear"]}, postDate: {$gt: 123}}},
+		{ $sort: {postDate: -1}}
+	]) 
+	 */
 	public List<Document> retrieveNewsByTag(String tag, int duration){
 		Criteria criteria = Criteria.where("tags").in(tag).and("postDate").gte(duration);
 		MatchOperation filterByTagAndDuration = Aggregation.match(criteria);
