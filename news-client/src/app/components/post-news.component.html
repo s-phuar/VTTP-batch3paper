@@ -1,0 +1,39 @@
+<form [formGroup]="form" (submit)="upload()">
+    <table>
+        <tr>
+            <td>News Title:</td>
+            <td><input type="text" size="30" formControlName="title"></td>
+        </tr>
+        <tr>
+            <td>Photo upload:</td>
+            <td><input type="file" accept="image/*" size="30" #fileUpload (change)="onFileChange()"></td>
+            <!-- <input type="file" accept="image/png, image/jpeg, image/jpg" size="30" formControlName="title"> -->
+            <td>{{error}}</td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><textarea rows="5" cols="30" formControlName="description"></textarea></td>
+        </tr>
+        <tr>
+            <td>Tags:</td>
+            <td><input type="text" size="30"  #tagInput></td>
+            <td><button type="button" (click)="addTag(tagInput)">+</button></td>
+        </tr>
+
+    </table>
+
+    <button type="submit" [disabled]="validCheck()">Upload</button>
+</form>
+
+<br>
+<div>
+    @for (tag of tagArray; let idx = $index; track tag) {
+            {{tag}}
+        <button type="button" (click)="deleteTag(idx)">X</button>
+    }
+
+</div>
+
+<div>
+    <button type="button" [routerLink]="['/']">Back</button>
+</div>

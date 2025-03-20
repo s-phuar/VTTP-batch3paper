@@ -1,0 +1,26 @@
+
+<div>
+    Time:
+    <select (change)="timeChange($event)">
+        <option value="1" [selected]="this.duration == 1">1 min</option>
+        <option value="5" [selected]="this.duration == 5">5 mins</option>
+        <option value="15" [selected]="this.duration == 15">15 mins</option>
+        <option value="30" [selected]="this.duration == 30">30 mins</option>
+        <option value="45" [selected]="this.duration == 45">45 mins</option>
+        <option value="60" [selected]="this.duration == 60">60 mins</option>
+    </select>
+</div>
+
+<div>
+    <button type="button" [routerLink]="['/post']">Post</button>
+</div>
+
+<!-- display top tags accordin to time above -->
+<h2>Top tags</h2>
+@for (li of retrieve$|async; let idx = $index; track li) {
+    <a [routerLink]="['/details', li.tag, duration]">{{ li.tag }} ({{ li.count }})</a>
+    <br>
+}@empty {
+    <h3>No new hashtags found within the last {{duration}}</h3>
+}
+
